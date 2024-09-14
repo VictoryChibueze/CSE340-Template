@@ -17,4 +17,8 @@ node_modules
 
 
 # gitignore is for local storage
-README
+#ignore README file
+README.md
+
+#ignore lock yaml file
+pnpm-lock.yaml
