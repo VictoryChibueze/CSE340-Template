@@ -4,3 +4,46 @@
 *:after {
   box-sizing: border-box;
 }
+
+/* Making the html responsive  */
+html {
+  font-size: 62.5%;
+}
+
+/* Header styles */
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+}
+.siteName a {
+  color: rgba(46, 46, 46, 0.9);
+  font-size: 2.5rem;
+  font-family: "Lato", sans-serif;
+  font-weight: 900;
+  text-decoration: none;
+}
+/* Navigation styles */
+nav {
+  background-color: rgb(46, 46, 46);
+  padding: 1rem 0;
+}
+nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  color: #fff;
+  list-style: none;
+  font-size: 1.35rem;
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+}
+/* Body styles */
+
+/* Footer styles */
