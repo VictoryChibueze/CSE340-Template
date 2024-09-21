@@ -112,6 +112,7 @@ nav ul li {
   color: rgb(17, 31, 36);
 }
 /* Footer styles */
+
 @media only screen and (min-width: 40rem) {
   body {
     margin: 0;
@@ -133,3 +134,24 @@ nav ul li {
     border-radius: 8px;
   }
 }
+
+/* .upgrades {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 30%);
+  gap: 1rem;
+  align-items: center;
+}
+.upgrades h3 {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  display: inline-block;
+}
+.upgrades figure {
+  background-color: rgba(4, 190, 228, 0.9);
+  height: 100%;
+}
+.upgrades img {
+  height: auto;
+  width: 100%;
+} */
