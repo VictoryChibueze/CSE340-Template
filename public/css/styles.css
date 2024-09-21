@@ -117,7 +117,7 @@ nav ul li {
 }
 
 .upgrades h3 {
-  font-size: 2rem;
+  font-size: 1.75rem;
   margin-bottom: 2rem;
 }
 
@@ -137,7 +137,7 @@ nav ul li {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 20rem;
+  width: clamp(20rem, 100%, 150px);
   height: 10rem;
   margin: 1rem 0;
   position: relative;
@@ -163,7 +163,11 @@ nav ul li {
 }
 
 /* Footer styles */
-
+footer {
+  font-size: 1.2rem;
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+}
 @media only screen and (min-width: 40rem) {
   body {
     margin: 0;
@@ -180,7 +184,7 @@ nav ul li {
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border: 3px solid rgba(4, 190, 228, 0.9);
-    max-width: 80%;
+    max-width: 70%;
     width: 100%;
     height: auto;
     border-radius: 8px;
@@ -188,12 +192,50 @@ nav ul li {
   #top-header {
     margin: 0 0.5rem;
   }
-  .reviews ul {
-    padding: 0 0 0 10px;
-    margin: 0 0 0 10px;
+  nav {
+    margin: 0 1rem;
   }
   #main-page h1 {
     font-size: 3rem;
     margin: 1.5rem 1rem;
+  }
+  .hero-features {
+    transform: translate(10%, -150%);
+    padding: calc(2rem -15px);
+
+    left: auto;
+    min-width: 20%;
+    height: auto;
+  }
+  .hero-features h4 {
+    padding: 2rem 2rem 2rem 0;
+  }
+  .reviews {
+    display: flex;
+    padding: calc(2rem - 10px);
+  }
+  .reviews ul {
+    padding: 0 0 0 1.3rem;
+    margin: 0 0 0 1.3rem;
+  }
+  .reviews h3 {
+    font-size: 2rem;
+    margin-left: 1rem;
+  }
+  .reviews ul li {
+    font-size: clamp(1.2rem, 1.5vw, 7%);
+    line-height: clamp(4.35rem, 3vw, 1.8rem);
+    font-weight: 900;
+  }
+  .upgrades {
+    width: 50%;
+    order: -1;
+  }
+  .upgrades h3 {
+    font-size: 2rem;
+    text-align: center;
+  }
+  footer {
+    font-size: 1.5rem;
   }
 }
