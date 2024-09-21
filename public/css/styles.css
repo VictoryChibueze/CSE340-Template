@@ -111,6 +111,57 @@ nav ul li {
   font-weight: 700;
   color: rgb(17, 31, 36);
 }
+
+.upgrades {
+  width: 100%;
+}
+
+.upgrades h3 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.upgrades-flex__one,
+.upgrades-flex__two {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.upgrades-flex__one div,
+.upgrades-flex__two div {
+  background-color: rgba(4, 190, 228, 0.9);
+  border: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 20rem;
+  height: 10rem;
+  margin: 1rem 0;
+  position: relative;
+}
+
+.upgrades-flex__one img,
+.upgrades-flex__two img {
+  width: 100%;
+  height: auto;
+  padding: 1rem;
+  object-fit: contain;
+}
+
+.upgrades-flex__one p,
+.upgrades-flex__two p {
+  margin: 0;
+  text-align: center;
+  font-size: 1.5rem;
+  position: absolute;
+  bottom: -2rem;
+  text-decoration: underline;
+  color: blue;
+}
+
 /* Footer styles */
 
 @media only screen and (min-width: 40rem) {
@@ -128,30 +179,21 @@ nav ul li {
   #wrapper {
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 3px solid rgba(4, 190, 228, 0.9);
     max-width: 80%;
     width: 100%;
     height: auto;
     border-radius: 8px;
   }
+  #top-header {
+    margin: 0 0.5rem;
+  }
+  .reviews ul {
+    padding: 0 0 0 10px;
+    margin: 0 0 0 10px;
+  }
+  #main-page h1 {
+    font-size: 3rem;
+    margin: 1.5rem 1rem;
+  }
 }
-
-/* .upgrades {
-  display: grid;
-  grid-template-rows: repeat(3, 1fr);
-  grid-template-columns: repeat(2, 30%);
-  gap: 1rem;
-  align-items: center;
-}
-.upgrades h3 {
-  grid-column-start: 1;
-  grid-column-end: 3;
-  display: inline-block;
-}
-.upgrades figure {
-  background-color: rgba(4, 190, 228, 0.9);
-  height: 100%;
-}
-.upgrades img {
-  height: auto;
-  width: 100%;
-} */
