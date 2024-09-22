@@ -81,7 +81,7 @@ nav ul li {
   padding: 1rem 1.2rem;
 }
 /* color: rgb(45, 197, 247); */
-.hero-features h4 {
+.hero-features h3 {
   color: rgba(4, 190, 228, 0.9);
   font-size: 1.75rem;
   font-weight: 900;
@@ -201,13 +201,13 @@ footer {
   }
   .hero-features {
     transform: translate(10%, -150%);
-    padding: calc(2rem -15px);
+    padding: calc(2rem - 15px);
 
     left: auto;
     min-width: 20%;
     height: auto;
   }
-  .hero-features h4 {
+  .hero-features h3 {
     padding: 2rem 2rem 2rem 0;
   }
   .reviews {
