@@ -23,3 +23,15 @@ FROM public.inventory
 INNER JOIN public.classification 
 ON inv_model = classification_name
 WHERE classification_name = 'Sport';
+
+
+
+SELECT * FROM public.inventory;
+UPDATE public.inventory
+SET 
+    inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'),
+    inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/');
+
+
+
+
