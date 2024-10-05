@@ -1,4 +1,4 @@
-const pool = require("../database/index.js");
+const pool = require("../database/index");
 
 /* ********************************
  * Get all classification data
@@ -23,10 +23,12 @@ async function getInventoryByClassificationId(classification_id) {
         WHERE i.classification_id = $1`,
       [classification_id]
     );
+    // console.log(data.rows);
     return data.rows;
   } catch (error) {
     console.error("getclassificationsbyid error " + error);
   }
 }
 
-module.exports = { getClassifications, getInventoryByClassificationId };
+// module.exports = getClassifications;
+module.exports = { getInventoryByClassificationId, getClassifications };

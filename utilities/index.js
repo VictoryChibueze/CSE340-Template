@@ -25,11 +25,11 @@ Util.getNav = async function (req, res, next) {
   return list;
 };
 
-Util.buiildClassificationGrid = async function (data) {
+Util.buildClassificationGrid = async function (data) {
   let grid;
   if (data.length > 0) {
     grid = '<ul id ="inv-display">';
-    data.forEach((vehicle) => {
+    data.rows.forEach((vehicle) => {
       grid += "<li>";
       grid +=
         '<a href="../../inv/detail/' +
@@ -72,6 +72,7 @@ Util.buiildClassificationGrid = async function (data) {
   } else {
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>';
   }
+
   return grid;
 };
 

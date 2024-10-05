@@ -1,5 +1,5 @@
-const invModel = require("../models/inventory-model");
 const utilities = require("../utilities/index");
+const invModel = require("../models/inventory-model");
 
 const invCont = {};
 
@@ -7,11 +7,15 @@ const invCont = {};
  *  Build inventory by classification
  *  *********************************/
 invCont.buildByClassificationId = async function (req, res, next) {
-  const classification_id = req.param.classification_id;
+  const classification_id = req.params.classification_id;
   const data = await invModel.getInventoryByClassificationId(classification_id);
-  const grid = await utilities.buildByClassificationGrid(data);
+  //   console.log(data);
+  const grid = await utilities.buildClassificationGrid(data);
   const nav = await utilities.getNav();
-  const className = data[0].classification_name;
+
+  const className = data.classification_name;
+  //   console.log(className);
+
   res.render("./inventory/classification", {
     title: className + " vehicles",
     nav,
