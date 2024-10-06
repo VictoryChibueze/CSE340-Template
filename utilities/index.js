@@ -7,7 +7,6 @@ const Util = {};
 Util.getNav = async function (req, res, next) {
   let data = await invModel.getClassifications();
   let list = "<ul>";
-  console.log(data);
   list += '<li><a href="/" title="Home page">Home</a></li>';
   data.rows.forEach((row) => {
     list += "<li>";
@@ -29,7 +28,7 @@ Util.buildClassificationGrid = async function (data) {
   let grid;
   if (data.length > 0) {
     grid = '<ul id ="inv-display">';
-    data.rows.forEach((vehicle) => {
+    data.forEach((vehicle) => {
       grid += "<li>";
       grid +=
         '<a href="../../inv/detail/' +
@@ -75,5 +74,8 @@ Util.buildClassificationGrid = async function (data) {
 
   return grid;
 };
+
+Util.handleErrors = (fn) => (req, res, next) =>
+  Promise.resolve(fn(req, res, next)).catch(next);
 
 module.exports = Util;
