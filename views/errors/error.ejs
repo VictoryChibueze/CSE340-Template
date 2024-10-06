@@ -1,0 +1,10 @@
+<!-- The content heading  -->
+
+<% if(title) {%>
+<h1><%= title %></h1>
+<% } else{ res.redirect('/') }%>
+
+<!-- A message block for display error messages -->
+<h1><%- message %></h1>
+
+<!-- Inventory display -->
