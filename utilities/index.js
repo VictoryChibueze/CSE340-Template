@@ -74,7 +74,14 @@ Util.buildClassificationGrid = async function (data) {
 
   return grid;
 };
-
+Util.buildInventoryDetails = async function (data) {
+  let details;
+  if (data.length > 0) {
+    details = '<div id= "inv-details">';
+    details += "<h2>";
+    details += "</div>";
+  }
+};
 Util.handleErrors = (fn) => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next);
 

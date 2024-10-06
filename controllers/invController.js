@@ -24,4 +24,15 @@ invCont.buildByClassificationId = async function (req, res, next) {
   });
 };
 
+invCont.buildInventoryDetails = async function (req, res, next) {
+  const classification_id = req.params.classificationId;
+  const data = await invModel.getDetailsByClassificationId(classification_id);
+
+  const details = await buildInventoryDetails(data);
+  res.render("./inventory/classification/details", {
+    title,
+    nav,
+    llll,
+  });
+};
 module.exports = invCont;
