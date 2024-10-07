@@ -175,7 +175,7 @@ nav ul li a:visited {
 
 /* Type Page */
 main h1 {
-  margin-left: 2rem;
+  margin-left: 1rem;
 }
 #inv-display {
   padding: 0px;
@@ -192,7 +192,7 @@ main h1 {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 150px 1fr;
-  background-color: var(--color-contrast);
+  background-color: #f4f1f1;
   list-style: none;
   font-size: 18px;
   color: var(--color-light);
@@ -210,21 +210,21 @@ main h1 {
 
 .car-card hr {
   height: 2px;
-  background-color: var(--color-light);
+  background-color: black;
   border: none;
 }
 
 .car-card-heading {
-  font-size: 18px;
+  font-size: 1.8rem;
 }
 
 .car-card-heading a {
-  color: var(--color-light);
-  padding: 10px;
+  color: rgb(45, 147, 180);
+  padding: 1rem;
 }
 
 .car-card-heading a:visited {
-  color: var(--color-light);
+  color: rgb(45, 147, 180);
 }
 /* Vehicle Details Page */
 #details-container {
