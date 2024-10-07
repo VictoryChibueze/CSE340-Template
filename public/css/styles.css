@@ -55,10 +55,6 @@ nav ul li {
   cursor: pointer;
 }
 
-#nav-link:hover {
-  background-color: #fff;
-  color: #000;
-}
 nav ul li a {
   text-decoration: none;
 }
@@ -327,6 +323,10 @@ footer {
   }
   nav {
     margin: 0 1rem;
+  }
+  #nav-link:hover {
+    background-color: #fff;
+    color: #000;
   }
   #main-page h1 {
     font-size: 3rem;
