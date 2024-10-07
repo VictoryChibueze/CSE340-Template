@@ -10,12 +10,12 @@ invCont.buildByClassificationId = async function (req, res, next) {
   const classification_id = req.params.classificationId;
 
   const data = await invModel.getInventoryByClassificationId(classification_id);
-  console.log(data);
+  console.log("classification" + data);
   const grid = await utilities.buildClassificationGrid(data);
   const nav = await utilities.getNav();
 
   const className = data[0].classification_name;
-  console.log(className);
+  // console.log(className);
 
   res.render("./inventory/classification", {
     title: className + " vehicles",
@@ -25,14 +25,16 @@ invCont.buildByClassificationId = async function (req, res, next) {
 };
 
 invCont.buildInventoryDetails = async function (req, res, next) {
-  const classification_id = req.params.classificationId;
-  const data = await invModel.getDetailsByClassificationId(classification_id);
+  const inv_id = req.params.invId;
+  const data = await invModel.getDetailsByInventoryId(inv_id);
+  const details = await utilities.buildEachInventoryDetails(data);
+  const nav = await utilities.getNav();
+  const vehicleTitle = `${data.inv_year} ${data.inv_make} ${data.inv_model}`;
 
-  const details = await buildInventoryDetails(data);
-  res.render("./inventory/classification/details", {
-    title,
+  res.render("./inventory/details", {
+    title: vehicleTitle,
     nav,
-    llll,
+    details,
   });
 };
 module.exports = invCont;

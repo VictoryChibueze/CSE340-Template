@@ -26,6 +26,8 @@ Util.getNav = async function (req, res, next) {
 
 Util.buildClassificationGrid = async function (data) {
   let grid;
+  console.log("YOU" + data);
+  console.log(data.length);
   if (data.length > 0) {
     grid = '<ul id ="inv-display">';
     data.forEach((vehicle) => {
@@ -74,13 +76,28 @@ Util.buildClassificationGrid = async function (data) {
 
   return grid;
 };
-Util.buildInventoryDetails = async function (data) {
-  let details;
-  if (data.length > 0) {
-    details = '<div id= "inv-details">';
-    details += "<h2>";
-    details += "</div>";
-  }
+Util.buildEachInventoryDetails = async function (data) {
+  let detail;
+  detail = `<div id=details-container>`;
+  detail += `<div class="image-container">`;
+  detail += `<img src="${data.inv_image}" alt="Image of ${data.inv_make} ${data.inv_model} on CSE Motors" id="vehicle-img-large">`;
+  detail += `</div>`;
+  detail += `<section id="vehicle-details">`;
+  detail += `<h2 class="section-title">${data.inv_make} ${data.inv_model} Details</h2>`;
+  detail += `<table><tbody>`;
+  detail += `<tr><td><span class="details-label">Price: $${new Intl.NumberFormat(
+    "en-US"
+  ).format(data.inv_price)}</span></td></tr>`;
+  detail += `<tr><td><span class="details-label">Description: </span>`;
+  detail += `<span class="details-text">${data.inv_description}</span></td></tr>`;
+  detail += `<tr><td><span class="details-label">Color: </span>`;
+  detail += `<span class="details-text">${data.inv_color}</span></td></tr>`;
+  detail += `<tr><td><span class="details-label">Miles: </span>`;
+  detail += `<span class="details-text">${new Intl.NumberFormat("en-US").format(
+    data.inv_miles
+  )}</span></td></tr>`;
+  detail += `</tbody></table></section></div>`;
+  return detail;
 };
 Util.handleErrors = (fn) => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next);

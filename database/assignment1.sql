@@ -2,7 +2,7 @@ CREATE TYPE public.account_type AS ENUM
     ('Client', 'Employee', 'Admin');
 
 ALTER TYPE public.account_type
-    OWNER TO database340;
+    OWNER TO datacse;
 
 
 CREATE TABLE public.classification (
@@ -52,7 +52,6 @@ CREATE TABLE IF NOT EXISTS public.account
 -- Data for table `classification`
 INSERT INTO public.classification(classification_name)
 VALUES ('Custom'),
-  ('Sport'),
   ('Sport'),
   ('SUV'),
   ('Truck'),

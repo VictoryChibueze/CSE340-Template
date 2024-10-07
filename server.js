@@ -13,6 +13,7 @@ const static = require("./routes/static");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
 const utilities = require("./utilities/index");
+const errorRoute = require("./routes/errorRoute");
 const invModel = require("./models/inventory-model");
 /* ***********************
  * View engine
@@ -33,7 +34,7 @@ app.get("/", utilities.handleErrors(baseController.buildHome));
 // Inventory Route
 
 app.use("/inv", inventoryRoute);
-
+app.use(errorRoute);
 // File Not Found - Must be lasst in the List
 
 app.use(async (req, res, next) => {
@@ -46,7 +47,8 @@ app.use(async (req, res, next) => {
 
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav();
-  console.error(`Error at: "${req.originalUrl}": ${err.message}`);
+
+  console.error(`Error at: "${req.params} ${req.originalUrl}": ${err.message}`);
   if (err.status == 404) {
     message = err.message;
   } else {
