@@ -7,11 +7,11 @@ const Util = {};
 Util.getNav = async function (req, res, next) {
   let data = await invModel.getClassifications();
   let list = "<ul>";
-  list += '<li><a href="/" title="Home page">Home</a></li>';
+  list += '<li><a id="nav-link" href="/" title="Home page">Home</a></li>';
   data.rows.forEach((row) => {
-    list += "<li>";
+    list += "<li >";
     list +=
-      '<a href="/inv/type/' +
+      '<a id = "nav-link" href="/inv/type/' +
       row.classification_id +
       '" title="See our inventory of ' +
       row.classification_name +
@@ -79,9 +79,12 @@ Util.buildEachInventoryDetails = async function (data) {
 Util.buildErrorMessage = async function (error) {
   let message;
   message = `<div id="error-page">`;
-  message += `<h2>${error.message}</h2>`;
-  message += `<img src="images/site/error.webp" width="600" height="400" loading="lazy" alt="Photo of 1 + 1 = 3 on chalkboard" id="error-img">`;
-  message += `<div><a href="https://www.pexels.com/photo/1-1-3-text-on-black-chalkboard-374918/" target="_blank" id="photo-source">Photo by George Becker</a></div>`;
+  message += `<h2 id = "error-heading">${error.message}</h2>`;
+  message += `<div id="error-container">`;
+  message += `<img src="images/site/error.jpg" width="600" height="400" loading="lazy" alt="Cartoon Image of car crash" id="error-img">`;
+  message += `</div>`;
+  message += `</div>`;
+  message += `<div id="error-overlay">`;
   message += `</div>`;
   return message;
 };
