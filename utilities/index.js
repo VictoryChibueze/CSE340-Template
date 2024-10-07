@@ -26,54 +26,31 @@ Util.getNav = async function (req, res, next) {
 
 Util.buildClassificationGrid = async function (data) {
   let grid;
-  console.log("YOU" + data);
-  console.log(data.length);
   if (data.length > 0) {
-    grid = '<ul id ="inv-display">';
+    grid = `<ul id="inv-display">`;
     data.forEach((vehicle) => {
-      grid += "<li>";
-      grid +=
-        '<a href="../../inv/detail/' +
-        vehicle.inv_id +
-        '" title="View ' +
-        vehicle.inv_make +
-        " " +
-        vehicle.inv_model +
-        'details"><img src="' +
-        vehicle.inv_thumbnail +
-        '" alt="Image of ' +
-        vehicle.inv_make +
-        " " +
-        vehicle.inv_model +
-        ' on CSE Motors" /></a>';
-      grid += '<div class="namePrice">';
-      grid += "<hr />";
-      grid += "<h2>";
-      grid +=
-        '<a href="../../inv/detail/' +
-        vehicle.inv_id +
-        '" title="View ' +
-        vehicle.inv_make +
-        " " +
-        vehicle.inv_model +
-        ' details">' +
-        vehicle.inv_make +
-        " " +
-        vehicle.inv_model +
-        "</a>";
-      grid += "</h2>";
-      grid +=
-        "<span>$" +
-        new Intl.NumberFormat("en-US").format(vehicle.inv_price) +
-        "</span>";
-      grid += "</div>";
-      grid += "</li>";
+      grid += `<li class="car-card">`;
+      grid += `<div class="image-container">`;
+      grid += `<a href="../../inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model} details">`;
+      grid += `<img src="${vehicle.inv_thumbnail}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model} on CSE Motors">`;
+      grid += `</a></div>`;
+      grid += `<div class="namePrice">`;
+      grid += `<hr>`;
+      grid += `<h2 class="car-card-heading">`;
+      grid += `<a href="../../inv/detail/${vehicle.inv_id}" title="View `;
+      grid += `${vehicle.inv_make} ${vehicle.inv_model} details">`;
+      grid += `${vehicle.inv_make} ${vehicle.inv_model}</a>`;
+      grid += `</h2>`;
+      grid += `<span>$${new Intl.NumberFormat(`en-US`).format(
+        vehicle.inv_price
+      )}</span>`;
+      grid += `</div>`;
+      grid += `</li>`;
     });
-    grid += "</ul>";
+    grid += `</ul>`;
   } else {
-    grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>';
+    grid += `<p class="notice">Sorry, no matching vehicles could be found.</p>`;
   }
-
   return grid;
 };
 Util.buildEachInventoryDetails = async function (data) {
@@ -98,6 +75,15 @@ Util.buildEachInventoryDetails = async function (data) {
   )}</span></td></tr>`;
   detail += `</tbody></table></section></div>`;
   return detail;
+};
+Util.buildErrorMessage = async function (error) {
+  let message;
+  message = `<div id="error-page">`;
+  message += `<h2>${error.message}</h2>`;
+  message += `<img src="images/site/error.webp" width="600" height="400" loading="lazy" alt="Photo of 1 + 1 = 3 on chalkboard" id="error-img">`;
+  message += `<div><a href="https://www.pexels.com/photo/1-1-3-text-on-black-chalkboard-374918/" target="_blank" id="photo-source">Photo by George Becker</a></div>`;
+  message += `</div>`;
+  return message;
 };
 Util.handleErrors = (fn) => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next);

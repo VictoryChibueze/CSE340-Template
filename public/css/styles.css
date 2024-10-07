@@ -7,6 +7,7 @@
 /* Making the html responsive  */
 html {
   font-size: 62.5%;
+  font-family: "Lato", sans-serif;
 }
 
 /* Header styles */
@@ -172,6 +173,109 @@ nav ul li a:visited {
   color: blue;
 }
 
+/* Type Page */
+main h1 {
+  margin-left: 2rem;
+}
+#inv-display {
+  padding: 0px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.car-card {
+  width: 300px;
+  margin: 10px;
+  padding: 20px;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 150px 1fr;
+  background-color: var(--color-contrast);
+  list-style: none;
+  font-size: 18px;
+  color: var(--color-light);
+  border-radius: 10px;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  grid-row: 1;
+  padding: 20px;
+}
+
+.car-card hr {
+  height: 2px;
+  background-color: var(--color-light);
+  border: none;
+}
+
+.car-card-heading {
+  font-size: 18px;
+}
+
+.car-card-heading a {
+  color: var(--color-light);
+  padding: 10px;
+}
+
+.car-card-heading a:visited {
+  color: var(--color-light);
+}
+/* Vehicle Details Page */
+#details-container {
+  display: block;
+}
+
+#vehicle-img-large {
+  grid-column: 1/2;
+  max-width: 100%;
+  height: auto;
+}
+
+#vehicle-details {
+  grid-column: 2/3;
+  font-size: 1.8rem;
+  font-family: "Lato", sans-serif;
+}
+
+.section-title {
+  font-size: 2.4rem;
+  margin: 0;
+  padding-left: 1rem;
+  padding-bottom: 1.5rem;
+}
+
+#vehicle-details tr:nth-child(odd) {
+  background-color: #f4f1f1;
+}
+
+#vehicle-details tr:nth-child(even) {
+  background-color: var(--color-contrast-25);
+}
+
+#vehicle-details td {
+  padding: 1rem;
+}
+
+.details-label {
+  font-weight: bold;
+}
+
+#error-page {
+  font-family: "Lato", sans-serif;
+}
+
+#error-img {
+  max-width: 600px;
+  width: 100%;
+  height: auto;
+}
+
 /* Footer styles */
 footer {
   font-size: 1.2rem;
@@ -244,6 +348,16 @@ footer {
   .upgrades h3 {
     font-size: 2rem;
     text-align: center;
+  }
+
+  #details-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+  }
+
+  #vehicle-details {
+    margin: 0 20px;
   }
   footer {
     font-size: 1.5rem;
