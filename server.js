@@ -6,6 +6,8 @@
  * Require Statements
  *************************/
 const express = require("express");
+const session = require("express-session");
+const pool = require("./database/");
 const expressLayouts = require("express-ejs-layouts");
 const env = require("dotenv").config();
 const app = express();
@@ -15,6 +17,31 @@ const inventoryRoute = require("./routes/inventoryRoute");
 const utilities = require("./utilities/index");
 const errorRoute = require("./routes/errorRoute");
 const invModel = require("./models/inventory-model");
+
+/* *************************************
+ * Middleware
+ * *************************************/
+
+app.use(
+  session({
+    store: new (require("connect-pg-simple")(session))({
+      createTableIfMissing: true,
+      pool,
+    }),
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true,
+    name: "sessionId",
+  })
+);
+
+// Express Message Middleware
+// Express Messages Middleware
+app.use(require("connect-flash")());
+app.use(function (req, res, next) {
+  res.locals.messages = require("express-messages")(req, res);
+  next();
+});
 /* ***********************
  * View engine
  *************************/
