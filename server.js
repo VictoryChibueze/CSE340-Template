@@ -14,8 +14,10 @@ const app = express();
 const static = require("./routes/static");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
+const accountRoute = require("./routes/accountRoute");
 const utilities = require("./utilities/index");
 const errorRoute = require("./routes/errorRoute");
+
 const invModel = require("./models/inventory-model");
 
 /* *************************************
@@ -58,6 +60,8 @@ app.use(static);
 // Index route
 app.get("/", utilities.handleErrors(baseController.buildHome));
 
+// Account Route
+app.use("/account", accountRoute);
 // Inventory Route
 
 app.use("/inv", inventoryRoute);
