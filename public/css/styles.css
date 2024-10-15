@@ -291,6 +291,82 @@ main h1 {
   height: auto;
 }
 
+/* Login Page */
+
+.form-card {
+  display: block;
+  margin: 10px auto;
+  width: 400px;
+  max-width: 100%;
+  font-family: var(--font-sans);
+}
+
+.form-input,
+#classificationList {
+  width: 100%;
+  font-size: 18px;
+  padding: 5px;
+  margin-bottom: 10px;
+  font-family: var(--font-sans);
+}
+
+#inventory-form textarea {
+  height: 100px;
+}
+
+.form-input:focus:valid {
+  background-color: rgb(171, 241, 214);
+}
+
+.form-input:focus:invalid {
+  background-color: rgb(221, 166, 166);
+}
+
+#sign-up {
+  text-align: center;
+}
+
+.form-button {
+  margin: 10px auto;
+  padding: 5px 40px;
+  font-family: var(--font-sans);
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 10px;
+  background-color: var(--color-button);
+  color: var(--color-font);
+  display: block;
+  cursor: pointer;
+}
+
+#sign-up a {
+  color: var(--color-light);
+}
+
+/* Register Page */
+
+.validation-word {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: bold;
+  background-color: var(--color-button);
+  color: var(--color-font);
+  padding: 0 20px;
+}
+
+.validation-word li {
+  padding: 0px;
+  font-size: 16px;
+  margin-left: 40px;
+  font-weight: normal;
+}
+
+.validation-word p {
+  font-size: 16px;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
 /* Footer styles */
 footer {
   font-size: 1.2rem;

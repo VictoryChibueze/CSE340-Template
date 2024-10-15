@@ -14,8 +14,31 @@
   <% }) %>
 </ul>
 <% } %>
+
 <div class="form-card">
-  <form action="/account/login" id="login-form" method="post">
+  <form id="register-form" action="/account/register" method="post">
+    <h2>Create an Account</h2>
+    <p>*All fields are required</p>
+    <label
+      >First Name:
+      <input
+        type="text"
+        name="account_firstname"
+        class="form-input"
+        required
+        value="<%= locals.account_firstname %>"
+      /> </label
+    ><br />
+    <label
+      >Last Name:
+      <input
+        type="text"
+        name="account_lastname"
+        class="form-input"
+        required
+        value="<%= locals.account_lastname %>"
+      /> </label
+    ><br />
     <label
       >Email:
       <input
@@ -23,8 +46,8 @@
         name="account_email"
         class="form-input"
         required
-        placeholder="Enter account email"
-        value="<%= locals.account_email  %>"
+        placeholder="Enter a valid email address"
+        value="<%= locals.account_email %>"
       /> </label
     ><br />
     <label
@@ -46,13 +69,9 @@
     </ul>
     <input
       type="submit"
-      value="Login"
+      value="Register"
       class="form-button"
-      title="Click here to login"
+      title="Click here to submit registration"
     />
   </form>
-  <div id="sign-up">
-    <span>No account?</span>
-    <a title="Click here to sign up" href="/account/register">Sign-up</a>
-  </div>
 </div>
