@@ -24,3 +24,5 @@ async function registerAccount(
     return error.message;
   }
 }
+
+module.exports = { registerAccount };

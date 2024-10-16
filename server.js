@@ -17,7 +17,7 @@ const inventoryRoute = require("./routes/inventoryRoute");
 const accountRoute = require("./routes/accountRoute");
 const utilities = require("./utilities/index");
 const errorRoute = require("./routes/errorRoute");
-
+const bodyParser = require("body-parser");
 const invModel = require("./models/inventory-model");
 
 /* *************************************
@@ -44,6 +44,9 @@ app.use(function (req, res, next) {
   res.locals.messages = require("express-messages")(req, res);
   next();
 });
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 /* ***********************
  * View engine
  *************************/
