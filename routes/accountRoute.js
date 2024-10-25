@@ -14,7 +14,10 @@ router.post(
 );
 
 // process the login attempt
-router.post("/login", (req, res) => {
-  res.status(200).send("login process");
-});
+router.post(
+  "/login",
+  regValidate.loginRules(),
+  regValidate.checkLoginData,
+  utilities.handleErrors(acctController.accountLogin)
+);
 module.exports = router;

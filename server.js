@@ -18,6 +18,7 @@ const accountRoute = require("./routes/accountRoute");
 const utilities = require("./utilities/index");
 const errorRoute = require("./routes/errorRoute");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const invModel = require("./models/inventory-model");
 
 /* *************************************
@@ -96,6 +97,10 @@ app.use(async (err, req, res, next) => {
     nav,
   });
 });
+
+/** Cookie parser middleware  */
+
+app.use(cookieParser());
 /* ***********************
  * Local Server Information
  * Values from .env (environment) file
