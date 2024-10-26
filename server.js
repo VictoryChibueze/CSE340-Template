@@ -101,6 +101,10 @@ app.use(async (err, req, res, next) => {
 /** Cookie parser middleware  */
 
 app.use(cookieParser());
+
+// JWT middleware
+
+app.use(utilities.checkJWTToken);
 /* ***********************
  * Local Server Information
  * Values from .env (environment) file
