@@ -32,7 +32,7 @@ router.get(
 // register new account
 router.post(
   "/register",
-  acctValidate.registationRules(),
+  acctValidate.registrationRules(),
   acctValidate.checkRegData,
   utilities.handleErrors(acctController.registerAccount)
 );
