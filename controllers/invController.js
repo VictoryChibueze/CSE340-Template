@@ -84,6 +84,7 @@ invCont.buildByInvId = async function (req, res, next) {
 invCont.buildManagement = async function (req, res, next) {
   let nav = await utilities.getNav();
   const classificationSelect = await utilities.buildClassificationList();
+  console.log(classificationSelect);
   res.render("./inventory/management", {
     title: "Vehicle Management",
     nav,
@@ -315,7 +316,7 @@ invCont.editInventory = async function (req, res, next) {
     );
     const itemName = `${inv_make} ${inv_model}`;
     req.flash("notice", "Sorry, the insert failed.");
-    res.status(501).render("inventory/edit-inventory", {
+    res.status(501).render("./inventory/edit-inventory", {
       title: "Edit " + itemName,
       nav,
       classList: classificationSelect,

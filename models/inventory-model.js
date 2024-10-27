@@ -10,6 +10,18 @@ async function getClassifications() {
   );
 }
 
+async function isClassificationValid(classification_id) {
+  try {
+    const data = await pool.query(
+      `SELECT * FROM public.classification WHERE classification_id = $1`,
+      [classification_id]
+    );
+    return data.rowCount > 0;
+  } catch (error) {
+    return error.message;
+  }
+}
+
 /* **********************************************
  * Get all inventory items and classification_name by classification_id
  * ***********************************************/
@@ -160,5 +172,6 @@ module.exports = {
   addClassification,
   addInventory,
   editInventory,
+  isClassificationValid,
   deleteInventory,
 };

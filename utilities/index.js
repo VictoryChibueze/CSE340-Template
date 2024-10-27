@@ -118,22 +118,80 @@ Util.handleErrors = (fn) => (req, res, next) =>
 
 /*  Check if Employee or Admin level authorization
  * ************************************ */
-// Util.checkAuthorized = (req, res, next) => {
-//   Util.checkLogin(req, res, () => {
-//     if (
-//       res.locals.accountData.account_type == "Employee" ||
-//       res.locals.accountData.account_type == "Admin"
-//     ) {
-//       next();
-//     } else {
-//       req.flash(
-//         "notice",
-//         "Unauthorized. You do not have permission to access the page."
-//       );
-//       return res.redirect("/account/login");
-//     }
-//   });
-// };
+Util.checkAuthorized = (req, res, next) => {
+  Util.checkLogin(req, res, () => {
+    if (
+      res.locals.accountData.account_type == "Employee" ||
+      res.locals.accountData.account_type == "Admin"
+    ) {
+      next();
+    } else {
+      req.flash(
+        "notice",
+        "Unauthorized. You do not have permission to access the page."
+      );
+      return res.redirect("/account/login");
+    }
+  });
+};
+
+Util.buildInventoryReviewSection = async function (reviewData) {
+  let section = "";
+  // if there is at least one review
+  if (reviewData.length > 0) {
+    section += `<ul class="review-list">`;
+
+    reviewData.forEach((review) => {
+      // set screenName = the first character of firstname and then lastname
+      const screenName = `${review.account_firstname.charAt(0)}${
+        review.account_lastname
+      }`;
+      // format the date to MMMM d yyyy
+      const reviewDate = new Date(review.review_date).toLocaleDateString(
+        "en-US",
+        { year: "numeric", month: "long", day: "numeric" }
+      );
+
+      section += `<li class="review">`;
+      section += `<p class="review-list-heading"><span id="screen-name">${screenName}</span> wrote on ${reviewDate}:</p>`;
+      section += `<hr>`;
+      section += `<p class="reviews-text">${review.review_text}</p>`;
+      section += `</li>`;
+    });
+    section += `</ul>`;
+  } else {
+    //if no reviews exist then add this message
+    section += `<p class="review-first-note">Be the first to write a review.</p>`;
+  }
+
+  return section;
+};
+
+Util.buildAccountReviewList = async function (reviewData) {
+  let reviews = "";
+
+  if (reviewData.length > 0) {
+    reviews += `<ol>`;
+    // make a list of each review item
+    reviewData.forEach((review) => {
+      const vehicle = `${review.inv_year} ${review.inv_make} ${review.inv_model}`;
+      // format the date to MMMM d yyyy
+      const reviewDate = new Date(review.review_date).toLocaleDateString(
+        "en-US",
+        { year: "numeric", month: "long", day: "numeric" }
+      );
+
+      reviews += `<li>Reviewed the ${vehicle} on ${reviewDate} | `;
+      reviews += `<a class="review-link" href="/review/edit/${review.review_id}">Edit</a> | <a class="review-link" href="/review/delete/${review.review_id}">Delete</a></li>`;
+    });
+    reviews += `</ol>`;
+  } else {
+    //if no reviews post this message
+    reviews += `<p class="mgmt-text">You have no reviews to display.</p>`;
+  }
+
+  return reviews;
+};
 
 Util.checkUserMatch = (req, res, next) => {
   Util.checkLogin(req, res, () => {
@@ -156,11 +214,13 @@ Util.checkJWTToken = (req, res, next) => {
   if (req.cookies.jwt) {
     jwt.verify(
       req.cookies.jwt,
-      process.env.ACCESS_TOKEN_SECRET,
+      process.env.ACCESS_TOKEN_SECRET ||
+        "b53faaaf114c87cc0fdb8660cef6d5133cf5069cdf7566f75e8d002550c760119db0d1edfaed6475f89016829ccdac57855f40afc7f0d7f0cc1be301f785bc47",
       function (err, accountData) {
         if (err) {
           req.flash("Please log in");
           res.clearCookie("jwt");
+
           return res.redirect("/account/login");
         }
         res.locals.accountData = accountData;
@@ -181,6 +241,7 @@ Util.checkLogin = (req, res, next) => {
     next();
   } else {
     req.flash("notice", "Please log in.");
+    console.log(res.locals.loggedin);
     return res.redirect("/account/login");
   }
 };

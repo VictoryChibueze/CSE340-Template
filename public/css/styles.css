@@ -387,6 +387,19 @@ main h1 {
   padding: 0;
 }
 
+.mgmt-link {
+  display: flex;
+  flex-direction: column;
+}
+.mgmt-link a {
+  text-decoration: none;
+  font-size: 1.5rem;
+  padding-left: 3rem;
+}
+
+.mgmt-link a:hover {
+  text-decoration: underline;
+}
 .notice {
   color: red;
   list-style-type: none;

@@ -114,9 +114,15 @@ async function buildRegister(req, res, next) {
  * *************************************** */
 async function buildAccountMgmt(req, res, next) {
   let nav = await utilities.getNav();
+  const account_id = res.locals.accountData.account_id;
+  console.log(account_id);
+  const reviewData = await reviewModel.getReviewsByAccountId(account_id);
+  const reviews = await utilities.buildAccountReviewList(reviewData);
+
   res.render("account", {
     title: "Account Management",
     nav,
+    reviews,
     errors: null,
   });
 }
@@ -318,7 +324,9 @@ async function editPassword(req, res, next) {
 async function accountLogin(req, res) {
   let nav = await utilities.getNav();
   const { account_email, account_password } = req.body;
+
   const accountData = await accountModel.getAccountByEmail(account_email);
+  console.log(accountData);
   if (!accountData) {
     req.flash("notice", "Please check your credentials and try again.");
     res.status(400).render("account/login", {
