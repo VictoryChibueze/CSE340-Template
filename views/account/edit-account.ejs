@@ -1,6 +1,7 @@
 <% if (title) { %>
 <h1><%= title %></h1>
-<% } else { res.redirect('/') } %> <%- messages() %> <% if (errors) { %>
+<% } else { %> <% res.redirect('/') %> <% } %> <%- messages() %> <% if (errors)
+{ %>
 <ul class="notice">
   <% errors.array().forEach(error => { %>
   <li><%= error.msg %></li>
@@ -9,10 +10,10 @@
 <% } %>
 
 <div class="form-card">
-  <form id="account-form" action="/account/edit-account" method="post">
+  <form id="edit-account-form" action="/account/edit-account" method="post">
     <p>*All fields are required</p>
-    <label
-      >First Name:
+    <label>
+      First Name:
       <input
         type="text"
         name="account_firstname"
@@ -21,8 +22,8 @@
         value="<%= locals.account_firstname %>"
       /> </label
     ><br />
-    <label
-      >Last Name:
+    <label>
+      Last Name:
       <input
         type="text"
         name="account_lastname"
@@ -31,8 +32,8 @@
         value="<%= locals.account_lastname %>"
       /> </label
     ><br />
-    <label
-      >Email:
+    <label>
+      Email:
       <input
         type="email"
         name="account_email"
@@ -42,23 +43,21 @@
         value="<%= locals.account_email %>"
       />
     </label>
-
     <input
       type="submit"
       value="Update"
       class="form-button"
       title="Click here to submit registration"
     />
-    <input type="hidden" name="account_id" <% if(locals.account_id) { % />
-    value="<%= locals.account_id %> " <% } %>>
+    <input type="hidden" name="account_id" value="<%= locals.account_id %>" />
   </form>
   <hr />
 
   <form id="password-form" action="/account/edit-password" method="post">
     <h2>Update Password</h2>
     <p>*Note your original password will be changed.</p>
-    <label
-      >Password:
+    <label>
+      Password:
       <input
         type="password"
         name="account_password"
@@ -82,7 +81,6 @@
       class="form-button"
       title="Click here to change password"
     />
-    <input type="hidden" name="account_id" <% if(locals.account_id) { % />
-    value="<%= locals.account_id %> " <% } %>>
+    <input type="hidden" name="account_id" value="<%= locals.account_id %>" />
   </form>
 </div>

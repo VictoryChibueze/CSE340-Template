@@ -4,7 +4,7 @@ const router = new express.Router();
 const reviewController = require("../controllers/reviewController");
 const invController = require("../controllers/invController");
 const utilities = require("../utilities/");
-const reviewValidate = require("../utilities/review-validation");
+const reviewValidate = require("../utilities/reviews-validation");
 
 // Route to build inventory details by inv_id view
 router.get(

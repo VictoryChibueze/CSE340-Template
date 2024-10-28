@@ -15,6 +15,7 @@ const static = require("./routes/static");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
 const accountRoute = require("./routes/accountRoute");
+const reviewRoute = require("./routes/reviewRoute");
 const utilities = require("./utilities/index");
 const errorRoute = require("./routes/errorRoute");
 const bodyParser = require("body-parser");
@@ -79,8 +80,12 @@ app.use("/account", accountRoute);
 // Inventory Route
 
 app.use("/inv", inventoryRoute);
+
+// Review route
+app.use("/review", reviewRoute);
+
+//Error middleware
 app.use(errorRoute);
-// File Not Found - Must be lasst in the List
 
 app.use(async (req, res, next) => {
   next({ status: 404, message: "Sorry we appear to have lost that page" });
