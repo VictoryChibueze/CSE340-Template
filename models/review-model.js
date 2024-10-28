@@ -49,7 +49,7 @@ async function getReviewsByAccountId(account_id) {
     );
     return data.rows;
   } catch (error) {
-    return error.message;
+    throw error;
   }
 }
 
@@ -61,7 +61,7 @@ async function addReview(review_text, inv_id, account_id) {
     const sql = `INSERT INTO review (review_text, inv_id, account_id) VALUES ($1, $2, $3) RETURNING *`;
     return await pool.query(sql, [review_text, inv_id, account_id]);
   } catch (error) {
-    return error.message;
+    throw error;
   }
 }
 
@@ -70,7 +70,7 @@ async function editReview(review_id, review_text) {
     const sql = `UPDATE review SET review_text = $1 WHERE review_id = $2 RETURNING *`;
     return await pool.query(sql, [review_text, review_id]);
   } catch (error) {
-    return error.message;
+    throw error;
   }
 }
 
@@ -79,7 +79,7 @@ async function deleteReview(review_id) {
     const sql = `DELETE FROM review WHERE review_id = $1`;
     return await pool.query(sql, [review_id]);
   } catch (error) {
-    return error.message;
+    throw error;
   }
 }
 

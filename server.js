@@ -40,6 +40,14 @@ app.use(
   })
 );
 
+/** Cookie parser middleware  */
+
+app.use(cookieParser());
+
+// JWT middleware
+
+app.use(utilities.checkJWTToken);
+
 // Express Message Middleware
 // Express Messages Middleware
 app.use(require("connect-flash")());
@@ -98,13 +106,6 @@ app.use(async (err, req, res, next) => {
   });
 });
 
-/** Cookie parser middleware  */
-
-app.use(cookieParser());
-
-// JWT middleware
-
-app.use(utilities.checkJWTToken);
 /* ***********************
  * Local Server Information
  * Values from .env (environment) file

@@ -1,86 +1,6 @@
-// const utilities = require("../utilities/index");
-// const acctModel = require("../models/account-model");
-// const bcrypt = require("bcryptjs");
-// /* **********************************************
-//  * Deliver login view
-//  **************************************************/
-
-// async function buildLogin(req, res, next) {
-//   let nav = await utilities.getNav();
-//   res.render("account/login", {
-//     title: "Login",
-//     nav,
-//     errors: null,
-//   });
-// }
-
-// /* ********************************************
-//  ** Deliveer registration view
-//  * *********************************************/
-
-// async function buildRegister(req, res, next) {
-//   let nav = await utilities.getNav();
-//   res.render("account/register", {
-//     title: "Register",
-//     nav,
-//     errors: null,
-//   });
-// }
-// /* ****************************************
-//  *  Process Registration
-//  * *************************************** */
-
-// async function registerAccount(req, res) {
-//   let nav = await utilities.getNav();
-//   const {
-//     account_firstname,
-//     account_lastname,
-//     account_email,
-//     account_password,
-//   } = req.body;
-
-//   //   Hash the password before storing
-//   let hashedPassword;
-//   try {
-//     // regular password and cost (salt is generated automatically )
-//     hashedPassword = await bcrypt.hashSync(account_password, 10);
-//   } catch (error) {
-//     req.flash("notice", "Sorry,there was an error processing the registration");
-//     res.status(500).render("account/register", {
-//       title: "Registration",
-//       nav,
-//       errors: null,
-//     });
-//   }
-//   const regResult = await acctModel.registerAccount(
-//     account_firstname,
-//     account_lastname,
-//     account_email,
-//     hashedPassword
-//   );
-//   if (regResult) {
-//     req.flash(
-//       "notice",
-//       `Congratulations,you\'re registered ${account_firstname}. Please log in.`
-//     );
-//     res.status(201).render("account/login", {
-//       title: "Login",
-//       nav,
-//       errors: null,
-//     });
-//   } else {
-//     req.flash("notice", "Sorry, the registration failed");
-//     res.status(501).render("account/register", {
-//       title: "Registration",
-//       nav,
-//       errors: null,
-//     });
-//   }
-// }
-// module.exports = { buildLogin, buildRegister, registerAccount };
-
 const utilities = require("../utilities");
 const accountModel = require("../models/account-model");
+const reviewModel = require("../models/review-model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -115,7 +35,7 @@ async function buildRegister(req, res, next) {
 async function buildAccountMgmt(req, res, next) {
   let nav = await utilities.getNav();
   const account_id = res.locals.accountData.account_id;
-  console.log(account_id);
+  console.log("Account id", account_id);
   const reviewData = await reviewModel.getReviewsByAccountId(account_id);
   const reviews = await utilities.buildAccountReviewList(reviewData);
 
@@ -374,10 +294,10 @@ async function accountLogin(req, res) {
 /* ****************************************
  *  Process logout request
  * ************************************ */
-// async function accountLogout(req, res) {
-//   res.clearCookie("jwt");
-//   res.redirect("/");
-// }
+async function accountLogout(req, res) {
+  res.clearCookie("jwt");
+  res.redirect("/");
+}
 
 module.exports = {
   buildLogin,
@@ -386,7 +306,7 @@ module.exports = {
   buildEditAccount,
   registerAccount,
   accountLogin,
-  // accountLogout,
+  accountLogout,
   editAccount,
   editPassword,
 };

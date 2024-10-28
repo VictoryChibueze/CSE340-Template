@@ -220,6 +220,7 @@ Util.checkJWTToken = (req, res, next) => {
         if (err) {
           req.flash("Please log in");
           res.clearCookie("jwt");
+          console.error(err);
 
           return res.redirect("/account/login");
         }
