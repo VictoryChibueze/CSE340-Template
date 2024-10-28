@@ -1,44 +1,3 @@
-// const utilities = require("../utilities/index");
-// const invModel = require("../models/inventory-model");
-
-// const invCont = {};
-
-// /* ********************************
-//  *  Build inventory by classification
-//  *  *********************************/
-// invCont.buildByClassificationId = async function (req, res, next) {
-//   const classification_id = req.params.classificationId;
-
-//   const data = await invModel.getInventoryByClassificationId(classification_id);
-//   console.log("classification" + data);
-//   const grid = await utilities.buildClassificationGrid(data);
-//   const nav = await utilities.getNav();
-
-//   const className = data[0].classification_name;
-//   // console.log(className);
-
-//   res.render("./inventory/classification", {
-//     title: className + " vehicles",
-//     nav,
-//     grid,
-//   });
-// };
-
-// invCont.buildInventoryDetails = async function (req, res, next) {
-//   const inv_id = req.params.invId;
-//   const data = await invModel.getDetailsByInventoryId(inv_id);
-//   const details = await utilities.buildEachInventoryDetails(data);
-//   const nav = await utilities.getNav();
-//   const vehicleTitle = `${data.inv_year} ${data.inv_make} ${data.inv_model}`;
-
-//   res.render("./inventory/details", {
-//     title: vehicleTitle,
-//     nav,
-//     details,
-//   });
-// };
-// module.exports = invCont;
-
 const invModel = require("../models/inventory-model");
 const utilities = require("../utilities/");
 
@@ -63,17 +22,46 @@ invCont.buildByClassificationId = async function (req, res, next) {
 
 /* ***************************
  *  Build inventory by id view
+//  * ************************** */
+// invCont.buildByInvId = async function (req, res, next) {
+//   const inv_id = req.params.invId;
+//   const data = await invModel.getInventoryByInvId(inv_id);
+//   const grid = await utilities.buildInventoryDetailGrid(data);
+//   let nav = await utilities.getNav();
+//   const vehicleTitle = `${data.inv_year} ${data.inv_make} ${data.inv_model}`;
+//   res.render("./inventory/detail", {
+//     title: vehicleTitle,
+//     nav,
+//     grid,
+//     errors: null,
+//   });
+// };
+
+/* ***************************
+ *  Build inventory by id view
  * ************************** */
 invCont.buildByInvId = async function (req, res, next) {
   const inv_id = req.params.invId;
-  const data = await invModel.getInventoryByInvId(inv_id);
-  const grid = await utilities.buildInventoryDetailGrid(data);
+  const invData = await invModel.getInventoryByInvId(inv_id);
+  const reviewData = await reviewModel.getReviewsByInvId(inv_id);
+  const screen_name =
+    res.locals.loggedin === 1
+      ? `${res.locals.accountData.account_firstname.charAt(0)}${
+          res.locals.accountData.account_lastname
+        }`
+      : "";
+  const grid = await utilities.buildEachInventoryDetails(invData);
+  const reviews = await utilities.buildInventoryReviewSection(reviewData);
   let nav = await utilities.getNav();
-  const vehicleTitle = `${data.inv_year} ${data.inv_make} ${data.inv_model}`;
+  const vehicleTitle = `${invData.inv_year} ${invData.inv_make} ${invData.inv_model}`;
   res.render("./inventory/detail", {
     title: vehicleTitle,
     nav,
     grid,
+    screen_name,
+    reviews: reviews,
+    review_text: "",
+    inv_id,
     errors: null,
   });
 };
@@ -376,6 +364,23 @@ invCont.getInventoryJSON = async (req, res, next) => {
   } else {
     next(new Error("No data returned"));
   }
+};
+
+/* ***************************
+ *  Build inventory by id view
+ * ************************** */
+invCont.buildByInvId = async function (req, res, next) {
+  const inv_id = req.params.invId;
+  const data = await invModel.getDetailsByInventoryId(inv_id);
+  const grid = await utilities.buildEachInventoryDetails(data);
+  let nav = await utilities.getNav();
+  const vehicleTitle = `${data.inv_year} ${data.inv_make} ${data.inv_model}`;
+  res.render("./inventory/details", {
+    title: vehicleTitle,
+    nav,
+    details: grid,
+    errors: null,
+  });
 };
 
 module.exports = invCont;
