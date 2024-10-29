@@ -405,7 +405,9 @@ main h1 {
   display: block;
   padding: 0;
 }
-
+.mgmt-card {
+  margin-left: 1.35rem;
+}
 .mgmt-link {
   display: flex;
   flex-direction: column;

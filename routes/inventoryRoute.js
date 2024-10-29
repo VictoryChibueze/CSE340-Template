@@ -54,7 +54,7 @@ router.get(
 // build the delete inventory confirmation
 router.get(
   "/delete/:inv_id",
-  // utilities.checkAuthorized,
+  utilities.checkAuthorized,
   utilities.handleErrors(invController.buildDeleteInventory)
 );
 
