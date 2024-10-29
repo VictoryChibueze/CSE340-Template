@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model");
+const reviewModel = require("../models/review-model");
 const utilities = require("../utilities/");
 
 const invCont = {};
@@ -37,9 +38,6 @@ invCont.buildByClassificationId = async function (req, res, next) {
 //   });
 // };
 
-/* ***************************
- *  Build inventory by id view
- * ************************** */
 invCont.buildByInvId = async function (req, res, next) {
   const inv_id = req.params.invId;
   const invData = await invModel.getInventoryByInvId(inv_id);
@@ -59,7 +57,7 @@ invCont.buildByInvId = async function (req, res, next) {
     nav,
     grid,
     screen_name,
-    reviews: reviews,
+    reviews,
     review_text: "",
     inv_id,
     errors: null,

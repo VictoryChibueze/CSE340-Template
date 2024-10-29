@@ -18,7 +18,7 @@ async function isClassificationValid(classification_id) {
     );
     return data.rowCount > 0;
   } catch (error) {
-    return error.message;
+    throw error;
   }
 }
 
@@ -38,7 +38,7 @@ async function getInventoryByClassificationId(classification_id) {
     console.log("data" + data.rows);
     return data.rows;
   } catch (error) {
-    console.error("getclassificationsbyid error " + error);
+    throw Error("getclassificationsbyid error " + error);
   }
 }
 
@@ -53,7 +53,23 @@ async function getDetailsByInventoryId(inv_id) {
 
     return data.rows[0];
   } catch (error) {
-    console.error("getdetailsbyclassificationid error " + error);
+    throw Error("getdetailsbyclassificationid error " + error);
+  }
+}
+
+/* ***************************
+ *  Get all inventory details by inv_id
+ * ************************** */
+async function getInventoryByInvId(inv_id) {
+  try {
+    const data = await pool.query(
+      `SELECT * FROM public.inventory
+      WHERE inv_id = $1`,
+      [inv_id]
+    );
+    return data.rows[0]; //Returns one row with vehicle details
+  } catch (error) {
+    throw Error("getInventoryByInvID error " + error);
   }
 }
 
@@ -66,7 +82,7 @@ async function addClassification(classification_name) {
       "INSERT INTO public.classification (classification_name) VALUES ($1) RETURNING *";
     return await pool.query(sql, [classification_name]);
   } catch (error) {
-    return error.message;
+    throw error;
   }
 }
 
@@ -149,7 +165,7 @@ async function editInventory(
     return data.rows[0];
   } catch (error) {
     console.error("model error: " + error);
-    return error.message;
+    throw error;
   }
 }
 
@@ -173,6 +189,7 @@ module.exports = {
   addClassification,
   addInventory,
   editInventory,
+  getInventoryByInvId,
   isClassificationValid,
   deleteInventory,
 };

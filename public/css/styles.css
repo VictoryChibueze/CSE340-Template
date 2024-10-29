@@ -307,6 +307,25 @@ main h1 {
   font-size: 1.3rem;
 }
 
+.reviews-container {
+  margin: 1.5rem auto;
+  padding: 2rem;
+  width: 65%;
+  border-radius: 2rem;
+  color: #fff;
+  background-color: rgba(4, 190, 228, 0.9);
+}
+#my-reviews-header {
+  font-size: 1.75rem;
+  color: rgb(76, 58, 13);
+}
+.acct-link {
+  text-decoration: none;
+  width: fit-content;
+}
+.acct-link:hover {
+  background-color: rgba(56, 163, 185, 0.9);
+}
 .form-input,
 #classificationList {
   width: 100%;
@@ -404,6 +423,17 @@ main h1 {
   color: red;
   list-style-type: none;
 }
+.review-login-note {
+  font-size: 1.5rem;
+}
+.review-login-link {
+  background-color: rgb(239, 215, 39);
+  border-radius: 1rem;
+  padding: 0.65rem;
+  color: #1a1919;
+  text-decoration: none;
+}
+
 /* Footer styles */
 footer {
   font-size: 1.2rem;
@@ -500,10 +530,18 @@ footer {
   #vehicle-details {
     margin: 0 20px;
   }
+  .reviews-container h2 {
+    font-size: 2rem;
+  }
   .form-card {
     width: 400px;
   }
   footer {
     font-size: 1.5rem;
+  }
+
+  .review-login-link:hover {
+    background-color: rgb(127, 122, 68);
+    color: #fff;
   }
 }
