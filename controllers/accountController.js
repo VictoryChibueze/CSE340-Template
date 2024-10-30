@@ -287,7 +287,7 @@ async function accountLogin(req, res) {
       });
     }
   } catch (error) {
-    return new Error("Access Forbidden");
+    throw new Error("Access Forbidden");
   }
 }
 
