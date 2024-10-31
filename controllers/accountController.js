@@ -159,9 +159,14 @@ async function editAccount(req, res, next) {
       account_type: editResult.data.account_type,
     };
 
-    const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, {
-      expiresIn: 3600,
-    });
+    const accessToken = jwt.sign(
+      accountData,
+      process.env.ACCESS_TOKEN_SECRET ||
+        "b53faaaf114c87cc0fdb8660cef6d5133cf5069cdf7566f75e8d002550c760119db0d1edfaed6475f89016829ccdac57855f40afc7f0d7f0cc1be301f785bc47",
+      {
+        expiresIn: 3600,
+      }
+    );
 
     if (process.env.NODE_ENV === "development") {
       res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 });
@@ -264,7 +269,8 @@ async function accountLogin(req, res) {
 
       const accessToken = jwt.sign(
         accountData,
-        process.env.ACCESS_TOKEN_SECRET,
+        process.env.ACCESS_TOKEN_SECRET ||
+          "b53faaaf114c87cc0fdb8660cef6d5133cf5069cdf7566f75e8d002550c760119db0d1edfaed6475f89016829ccdac57855f40afc7f0d7f0cc1be301f785bc47",
         { expiresIn: 3600 }
       );
       // if (process.env.NODE_ENV === "development") {
